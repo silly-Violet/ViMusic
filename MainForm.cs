@@ -5,11 +5,15 @@ namespace ViMusic
 {
     public partial class MainForm : Form
     {
-        readonly MusicPlayer musicPlayer = new();
-        readonly Graphics progressBarGraphics;
-        ShellFile? currentSong;
-        List<string> currentPlaylist = new();
-        int playlistIndex = -1; //negative indicates not in playlist mode
+        private readonly MusicPlayer musicPlayer = new();
+        
+        private ShellFile? currentSong;
+        private List<string> currentPlaylist = new();
+
+        private int playlistIndex = -1; //negative indicates not in playlist mode
+
+        private int hoverCounter = 0;
+        private readonly Graphics progressBarGraphics;
 
         public MainForm()
         {
@@ -96,8 +100,28 @@ namespace ViMusic
                     artistName.Text = "Artist: " + (string.IsNullOrEmpty(artist) ? "N/A" : artist);
                 }
             }
+            // UpdateHoverLabel
+            {                
+                int hoverCooldown = 5; //change to modify how long it takes to hide hover
 
-            
+                if (hoverLabel.Tag.ToString() == "modified")
+                {
+                    hoverLabel.Tag = "counting";
+
+                    hoverCounter = 0;
+                }
+                else if (hoverLabel.Tag.ToString() == "counting")
+                {
+                    if (hoverCounter >= hoverCooldown)
+                    {
+                        hoverLabel.Hide();
+                        hoverLabel.Tag = "hidden";
+                    }
+                    else
+                        hoverCounter++;
+                }
+            }
+
         }
 
         private void ResetRender()
@@ -131,14 +155,14 @@ namespace ViMusic
                 // rendering
 
                 //if (!musicPlayer.IsStopped)
-                
+
                 try
                 {
                     if (!this.IsHandleCreated) continue; // make sure invoke isn't called when it's not allowed
                     Invoke(UpdateEverything);
                 }
                 catch (ObjectDisposedException) { return; } // crashed on closing without this
-                
+
 
                 Thread.Sleep(100);
             }
@@ -185,15 +209,27 @@ namespace ViMusic
 
             //https://stackoverflow.com/questions/18040945/read-picture-box-mouse-coordinates-on-click
 
-            Point clickCoords = ((MouseEventArgs)e).Location;
+            var clickCoords = ((MouseEventArgs)e).Location;
 
             musicPlayer.Seek(TimeSpan.FromSeconds(musicPlayer.Duration.TotalSeconds * ((double)clickCoords.X / (double)progressBar.Width))); // seek to correct time from the location clicked
             ResetRender();
         }
 
-        private void ProgressBar_Hover(object sender, EventArgs e)
+        private void ProgressBar_MouseMove(object sender, EventArgs e)
         {
+            var mousePos = progressBar.PointToClient(Cursor.Position);
 
+            var hoverTime = TimeSpan.FromSeconds(musicPlayer.Duration.TotalSeconds * ((double)mousePos.X / (double)progressBar.Width));
+            var minutes = hoverTime.Minutes;
+            var seconds = hoverTime.Seconds;
+
+            hoverLabel.Show();
+
+            hoverLabel.Text = $"{(minutes < 10 ? $"0{minutes}" : minutes)}:{(seconds < 10 ? $"0{seconds}" : seconds)}";
+            hoverLabel.Top = progressBar.Top - 20;
+            hoverLabel.Left = mousePos.X + 33;
+
+            hoverLabel.Tag = "modified";
         }
 
         private void OpenFile_Click(object sender, EventArgs e)
@@ -217,6 +253,11 @@ namespace ViMusic
             this.Hide();
             Thread.Sleep(10000);
             this.Show();
+        }
+
+        private void timeLabel_Click(object sender, EventArgs e)
+        {
+
         }
 
 

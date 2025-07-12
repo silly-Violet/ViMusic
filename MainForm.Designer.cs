@@ -39,6 +39,7 @@
             albumName = new Label();
             artistName = new Label();
             folderDialog = new FolderBrowserDialog();
+            hoverLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
             SuspendLayout();
             // 
@@ -57,11 +58,12 @@
             // 
             timeLabel.AutoSize = true;
             timeLabel.BackColor = Color.Transparent;
-            timeLabel.Location = new Point(12, 187);
+            timeLabel.Location = new Point(12, 242);
             timeLabel.Name = "timeLabel";
             timeLabel.Size = new Size(72, 15);
             timeLabel.TabIndex = 2;
             timeLabel.Text = "00:00 / 00:00";
+            timeLabel.Click += timeLabel_Click;
             // 
             // progressBar
             // 
@@ -72,7 +74,7 @@
             progressBar.TabIndex = 3;
             progressBar.TabStop = false;
             progressBar.Click += ProgressBar_Click;
-            progressBar.MouseHover += ProgressBar_Hover;
+            progressBar.MouseMove += ProgressBar_MouseMove;
             // 
             // openFile
             // 
@@ -106,7 +108,7 @@
             // 
             songName.AutoSize = true;
             songName.BackColor = Color.Transparent;
-            songName.Location = new Point(12, 249);
+            songName.Location = new Point(12, 284);
             songName.Name = "songName";
             songName.Size = new Size(133, 15);
             songName.TabIndex = 6;
@@ -116,7 +118,7 @@
             // 
             albumName.AutoSize = true;
             albumName.BackColor = Color.Transparent;
-            albumName.Location = new Point(12, 274);
+            albumName.Location = new Point(12, 309);
             albumName.Name = "albumName";
             albumName.Size = new Size(137, 15);
             albumName.TabIndex = 7;
@@ -126,11 +128,22 @@
             // 
             artistName.AutoSize = true;
             artistName.BackColor = Color.Transparent;
-            artistName.Location = new Point(12, 301);
+            artistName.Location = new Point(12, 336);
             artistName.Name = "artistName";
             artistName.Size = new Size(129, 15);
             artistName.TabIndex = 8;
             artistName.Text = "Artist: No Song Loaded";
+            // 
+            // hoverLabel
+            // 
+            hoverLabel.AutoSize = true;
+            hoverLabel.BackColor = Color.Transparent;
+            hoverLabel.Location = new Point(206, 118);
+            hoverLabel.Name = "hoverLabel";
+            hoverLabel.Size = new Size(0, 15);
+            hoverLabel.TabIndex = 9;
+            hoverLabel.Tag = "hidden";
+            hoverLabel.Visible = false;
             // 
             // MainForm
             // 
@@ -138,6 +151,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
             ClientSize = new Size(562, 370);
+            Controls.Add(hoverLabel);
             Controls.Add(artistName);
             Controls.Add(albumName);
             Controls.Add(songName);
@@ -167,5 +181,6 @@
         private Label albumName;
         private Label artistName;
         private FolderBrowserDialog folderDialog;
+        private Label hoverLabel;
     }
 }

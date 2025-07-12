@@ -1,0 +1,4 @@
+﻿Pre 12/07/2025: Changes not recorded
+
+12/07/2025:
+	Added label to display where in the song you are hovering over in the progress bar
