@@ -40,6 +40,7 @@
             artistName = new Label();
             folderDialog = new FolderBrowserDialog();
             hoverLabel = new Label();
+            playlistListBox = new ListBox();
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             pausePlayButton.BackColor = Color.FromArgb(41, 41, 41);
             pausePlayButton.FlatStyle = FlatStyle.Popup;
-            pausePlayButton.Location = new Point(12, 205);
+            pausePlayButton.Location = new Point(12, 177);
             pausePlayButton.Name = "pausePlayButton";
             pausePlayButton.Size = new Size(32, 32);
             pausePlayButton.TabIndex = 1;
@@ -58,19 +59,18 @@
             // 
             timeLabel.AutoSize = true;
             timeLabel.BackColor = Color.Transparent;
-            timeLabel.Location = new Point(12, 242);
+            timeLabel.Location = new Point(50, 200);
             timeLabel.Name = "timeLabel";
             timeLabel.Size = new Size(72, 15);
             timeLabel.TabIndex = 2;
             timeLabel.Text = "00:00 / 00:00";
-            timeLabel.Click += timeLabel_Click;
             // 
             // progressBar
             // 
             progressBar.BackColor = Color.FromArgb(30, 43, 66);
-            progressBar.Location = new Point(50, 205);
+            progressBar.Location = new Point(50, 177);
             progressBar.Name = "progressBar";
-            progressBar.Size = new Size(500, 32);
+            progressBar.Size = new Size(472, 20);
             progressBar.TabIndex = 3;
             progressBar.TabStop = false;
             progressBar.Click += ProgressBar_Click;
@@ -108,31 +108,31 @@
             // 
             songName.AutoSize = true;
             songName.BackColor = Color.Transparent;
-            songName.Location = new Point(12, 284);
+            songName.Location = new Point(298, 50);
             songName.Name = "songName";
-            songName.Size = new Size(133, 15);
+            songName.Size = new Size(67, 15);
             songName.TabIndex = 6;
-            songName.Text = "Name: No Song Loaded";
+            songName.Text = "Name: N/A";
             // 
             // albumName
             // 
             albumName.AutoSize = true;
             albumName.BackColor = Color.Transparent;
-            albumName.Location = new Point(12, 309);
+            albumName.Location = new Point(298, 144);
             albumName.Name = "albumName";
-            albumName.Size = new Size(137, 15);
+            albumName.Size = new Size(71, 15);
             albumName.TabIndex = 7;
-            albumName.Text = "Album: No Song Loaded";
+            albumName.Text = "Album: N/A";
             // 
             // artistName
             // 
             artistName.AutoSize = true;
             artistName.BackColor = Color.Transparent;
-            artistName.Location = new Point(12, 336);
+            artistName.Location = new Point(298, 98);
             artistName.Name = "artistName";
-            artistName.Size = new Size(129, 15);
+            artistName.Size = new Size(63, 15);
             artistName.TabIndex = 8;
-            artistName.Text = "Artist: No Song Loaded";
+            artistName.Text = "Artist: N/A";
             // 
             // hoverLabel
             // 
@@ -145,12 +145,27 @@
             hoverLabel.Tag = "hidden";
             hoverLabel.Visible = false;
             // 
+            // playlistListBox
+            // 
+            playlistListBox.BackColor = Color.Black;
+            playlistListBox.BorderStyle = BorderStyle.FixedSingle;
+            playlistListBox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            playlistListBox.ForeColor = Color.White;
+            playlistListBox.ItemHeight = 17;
+            playlistListBox.Location = new Point(12, 50);
+            playlistListBox.Name = "playlistListBox";
+            playlistListBox.Size = new Size(280, 104);
+            playlistListBox.Sorted = true;
+            playlistListBox.TabIndex = 10;
+            playlistListBox.SelectedIndexChanged += PlaylistListBox_SelectedIndexChanged;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
-            ClientSize = new Size(562, 370);
+            ClientSize = new Size(534, 226);
+            Controls.Add(playlistListBox);
             Controls.Add(hoverLabel);
             Controls.Add(artistName);
             Controls.Add(albumName);
@@ -182,5 +197,6 @@
         private Label artistName;
         private FolderBrowserDialog folderDialog;
         private Label hoverLabel;
+        private ListBox playlistListBox;
     }
 }

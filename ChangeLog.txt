@@ -2,3 +2,6 @@
 
 12/07/2025:
 	Added label to display where in the song you are hovering over in the progress bar
+
+13/07/2025:
+	Added ListBox containing the current songs in the playlist, songs can be clicked on to play them

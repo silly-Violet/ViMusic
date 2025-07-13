@@ -14,6 +14,8 @@ modify shows a shorter duration than it should however still plays normally (it 
 
 features:
 
+modify tab indexes so it's natural to move with only keyboard
+
 add settings for things like hover cooldown
 
 add musicsync built in (should be as a simple as opening the application as a separate window from a button) (also maybe remake musicsync as a winform)
@@ -21,8 +23,6 @@ add musicsync built in (should be as a simple as opening the application as a se
 add tray icon and ability to hide() main windows and show() from tray right click option
 
 Add about/credits for nuget packages and me
-
-when hovering mouse over progress bar show the time it would jump to
 
 volume controls
 
@@ -32,7 +32,7 @@ loop playlist and individual song
 
 drag and drop
 
-hover tooltips										!! current goal
+hover tooltips										
 
 forward and back songs in playlist
 

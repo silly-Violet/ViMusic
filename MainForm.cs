@@ -6,7 +6,7 @@ namespace ViMusic
     public partial class MainForm : Form
     {
         private readonly MusicPlayer musicPlayer = new();
-        
+
         private ShellFile? currentSong;
         private List<string> currentPlaylist = new();
 
@@ -20,6 +20,7 @@ namespace ViMusic
             InitializeComponent();
 
             progressBarGraphics = progressBar.CreateGraphics();
+            playlistListBox.BackColor = this.BackColor;
 
             ResetRender();
 
@@ -101,7 +102,7 @@ namespace ViMusic
                 }
             }
             // UpdateHoverLabel
-            {                
+            {
                 int hoverCooldown = 5; //change to modify how long it takes to hide hover
 
                 if (hoverLabel.Tag.ToString() == "modified")
@@ -128,9 +129,9 @@ namespace ViMusic
         {
             timeLabel.Text = "00:00 / 00:00";
             progressBarGraphics.Clear(Color.FromArgb(255, 30, 43, 66));
-            songName.Text = "Name: No Song Loaded";
-            albumName.Text = "Album: No Song Loaded";
-            artistName.Text = "Artist: No Song Loaded";
+            songName.Text = "Name: N/A";
+            albumName.Text = "Album: N/A";
+            artistName.Text = "Artist: N/A";
             UpdateEverything();
         }
 
@@ -193,8 +194,18 @@ namespace ViMusic
             foreach (var file in new DirectoryInfo(filepath).GetFiles())
             {
                 if (validExtensions.Contains(file.Extension))
+                {
                     currentPlaylist.Add(file.FullName);
+
+
+                    var title = ShellFile.FromFilePath(file.FullName).Properties.System.Title.Value;
+
+                    playlistListBox.Items.Add(string.IsNullOrWhiteSpace(title) ? file.Name.Substring(0, file.Name.IndexOf('.')) : title);
+                }
+
             }
+
+            
 
             if (!musicPlayer.IsStopped) musicPlayer.Stop();
             LoadSong(currentPlaylist[0]);
@@ -226,7 +237,7 @@ namespace ViMusic
             hoverLabel.Show();
 
             hoverLabel.Text = $"{(minutes < 10 ? $"0{minutes}" : minutes)}:{(seconds < 10 ? $"0{seconds}" : seconds)}";
-            hoverLabel.Top = progressBar.Top - 20;
+            hoverLabel.Top = progressBar.Top - 18;
             hoverLabel.Left = mousePos.X + 33;
 
             hoverLabel.Tag = "modified";
@@ -248,16 +259,11 @@ namespace ViMusic
             }
         }
 
-        private void debugButton_Click(object sender, EventArgs e)
+        private void PlaylistListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Hide();
-            Thread.Sleep(10000);
-            this.Show();
-        }
-
-        private void timeLabel_Click(object sender, EventArgs e)
-        {
-
+            //LoadSong(currentPlaylist[playlistListBox.SelectedIndex]);
+            playlistIndex = playlistListBox.SelectedIndex;
+            musicPlayer.Stop();
         }
 
 
