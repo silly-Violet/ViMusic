@@ -47,7 +47,12 @@ namespace ViMusic
             }
             set
             {
-                outputDevice.Volume = value;
+                if (value < 0)
+                    outputDevice.Volume = 0;
+                else if (value > 1)
+                    outputDevice.Volume = 1;
+                else
+                    outputDevice.Volume = MathF.Round(value, 1);
             }
         }
 
@@ -78,6 +83,7 @@ namespace ViMusic
         public MusicPlayer()
         {
             outputDevice = new WaveOutEvent();
+            outputDevice.Volume = 1.0f;
         }
 
         public void LoadAudioFromFile(string filename)

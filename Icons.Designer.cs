@@ -109,5 +109,15 @@ namespace ViMusic {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] stop {
+            get {
+                object obj = ResourceManager.GetObject("stop", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

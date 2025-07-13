@@ -143,4 +143,25 @@
   <metadata name="folderDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>121, 17</value>
   </metadata>
+  <data name="stopButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAFJJREFUOE/t
+        zDEKgEAQBMH7/6fPZFhkotKLBCtueq3P2C/1Z3So+jM6VP0ZFAW1FAW1FAW1FAW1FAW1FAW1FAW1FAW1
+        9+iJ/owOVX9Gh6o/v3MXLCUOD4l37rMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="volumeDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAADBJREFUOE/t
+        zDEOAAAEBEH//zSdxDaITm7qvTMTufEl7gvGU/xJDKf4UzDucC/yVgCJkM8x+2YxbgAAAABJRU5ErkJg
+        gg==
+</value>
+  </data>
+  <data name="volumeUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAENJREFUOE/t
+        zEEKACAIRFHvf+kiqMC/cSg3YW8p4zd7Xpt4P7JiadECQQYi/Hc4VrGzcahix+E4wv/QdYAKBofU2Cfp
+        H4pesCVQPXYAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

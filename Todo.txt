@@ -2,9 +2,9 @@
 
 bugs:
 
-modify shows a shorter duration than it should however still plays normally (it fixed itself? no for some reason specifically the one in my test folder is bugged)
+modify shows a shorter duration than it should however still plays normally (it fixed itself? no for some reason specifically the one in my test folder is bugged, actually no again it's just weird idk)
 
-
+stop didn't pause once
 
 
 
@@ -20,19 +20,15 @@ add settings for things like hover cooldown
 
 add musicsync built in (should be as a simple as opening the application as a separate window from a button) (also maybe remake musicsync as a winform)
 
-add tray icon and ability to hide() main windows and show() from tray right click option
+add tray icon and ability to hide main windows and show from tray right click option
 
 Add about/credits for nuget packages and me
 
-volume controls
-
-stop button
+save volume to be loaded next time, along with settings once implimented
 
 loop playlist and individual song
 
 drag and drop
-
-change the way listbox scrollbar looks to be darkmode too
 
 forward and back songs in playlist
 

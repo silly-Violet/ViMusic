@@ -43,14 +43,20 @@
             hoverLabel = new Label();
             playlistListBox = new ListBox();
             toolTipHandler = new ToolTip(components);
+            stopButton = new Button();
+            loopButton = new Button();
+            volumeDown = new Button();
+            volumeUp = new Button();
+            volumeDisplay = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)volumeDisplay).BeginInit();
             SuspendLayout();
             // 
             // pausePlayButton
             // 
             pausePlayButton.BackColor = Color.FromArgb(41, 41, 41);
             pausePlayButton.FlatStyle = FlatStyle.Popup;
-            pausePlayButton.Location = new Point(12, 177);
+            pausePlayButton.Location = new Point(12, 187);
             pausePlayButton.Name = "pausePlayButton";
             pausePlayButton.Size = new Size(32, 32);
             pausePlayButton.TabIndex = 1;
@@ -62,7 +68,7 @@
             // 
             timeLabel.AutoSize = true;
             timeLabel.BackColor = Color.Transparent;
-            timeLabel.Location = new Point(50, 200);
+            timeLabel.Location = new Point(50, 181);
             timeLabel.Name = "timeLabel";
             timeLabel.Size = new Size(72, 15);
             timeLabel.TabIndex = 2;
@@ -71,9 +77,9 @@
             // progressBar
             // 
             progressBar.BackColor = Color.FromArgb(30, 43, 66);
-            progressBar.Location = new Point(50, 177);
+            progressBar.Location = new Point(154, 199);
             progressBar.Name = "progressBar";
-            progressBar.Size = new Size(472, 20);
+            progressBar.Size = new Size(368, 20);
             progressBar.TabIndex = 3;
             progressBar.TabStop = false;
             progressBar.Click += ProgressBar_Click;
@@ -159,17 +165,81 @@
             playlistListBox.ItemHeight = 17;
             playlistListBox.Location = new Point(12, 50);
             playlistListBox.Name = "playlistListBox";
-            playlistListBox.Size = new Size(280, 104);
-            playlistListBox.Sorted = true;
+            playlistListBox.Size = new Size(280, 121);
             playlistListBox.TabIndex = 10;
             playlistListBox.SelectedIndexChanged += PlaylistListBox_SelectedIndexChanged;
+            // 
+            // stopButton
+            // 
+            stopButton.BackColor = Color.FromArgb(41, 41, 41);
+            stopButton.FlatStyle = FlatStyle.Popup;
+            stopButton.Image = (Image)resources.GetObject("stopButton.Image");
+            stopButton.Location = new Point(50, 199);
+            stopButton.Name = "stopButton";
+            stopButton.Size = new Size(20, 20);
+            stopButton.TabIndex = 11;
+            toolTipHandler.SetToolTip(stopButton, "Stop");
+            stopButton.UseVisualStyleBackColor = false;
+            stopButton.Click += StopButton_Click;
+            // 
+            // loopButton
+            // 
+            loopButton.BackColor = Color.FromArgb(41, 41, 41);
+            loopButton.FlatStyle = FlatStyle.Popup;
+            loopButton.Location = new Point(76, 199);
+            loopButton.Name = "loopButton";
+            loopButton.Size = new Size(20, 20);
+            loopButton.TabIndex = 12;
+            toolTipHandler.SetToolTip(loopButton, "Loop");
+            loopButton.UseVisualStyleBackColor = false;
+            // 
+            // volumeDown
+            // 
+            volumeDown.BackColor = Color.FromArgb(41, 41, 41);
+            volumeDown.FlatStyle = FlatStyle.Popup;
+            volumeDown.Image = (Image)resources.GetObject("volumeDown.Image");
+            volumeDown.Location = new Point(102, 199);
+            volumeDown.Name = "volumeDown";
+            volumeDown.Size = new Size(20, 20);
+            volumeDown.TabIndex = 13;
+            toolTipHandler.SetToolTip(volumeDown, "Volume Down");
+            volumeDown.UseVisualStyleBackColor = false;
+            volumeDown.Click += VolumeDown_Click;
+            // 
+            // volumeUp
+            // 
+            volumeUp.BackColor = Color.FromArgb(41, 41, 41);
+            volumeUp.FlatStyle = FlatStyle.Popup;
+            volumeUp.Image = (Image)resources.GetObject("volumeUp.Image");
+            volumeUp.Location = new Point(128, 199);
+            volumeUp.Name = "volumeUp";
+            volumeUp.Size = new Size(20, 20);
+            volumeUp.TabIndex = 14;
+            toolTipHandler.SetToolTip(volumeUp, "Volume Up");
+            volumeUp.UseVisualStyleBackColor = false;
+            volumeUp.Click += VolumeUp_Click;
+            // 
+            // volumeDisplay
+            // 
+            volumeDisplay.BackColor = Color.FromArgb(30, 43, 66);
+            volumeDisplay.Location = new Point(102, 225);
+            volumeDisplay.Name = "volumeDisplay";
+            volumeDisplay.Size = new Size(46, 10);
+            volumeDisplay.TabIndex = 16;
+            volumeDisplay.TabStop = false;
+            toolTipHandler.SetToolTip(volumeDisplay, "Volume Meter");
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
-            ClientSize = new Size(534, 226);
+            ClientSize = new Size(534, 240);
+            Controls.Add(volumeDisplay);
+            Controls.Add(volumeUp);
+            Controls.Add(volumeDown);
+            Controls.Add(loopButton);
+            Controls.Add(stopButton);
             Controls.Add(playlistListBox);
             Controls.Add(hoverLabel);
             Controls.Add(artistName);
@@ -186,6 +256,7 @@
             Name = "MainForm";
             Text = "Vi Music";
             ((System.ComponentModel.ISupportInitialize)progressBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)volumeDisplay).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,5 +275,10 @@
         private Label hoverLabel;
         private ListBox playlistListBox;
         private ToolTip toolTipHandler;
+        private Button stopButton;
+        private Button loopButton;
+        private Button volumeDown;
+        private Button volumeUp;
+        private PictureBox volumeDisplay;
     }
 }

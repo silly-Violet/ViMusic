@@ -6,3 +6,4 @@
 13/07/2025:
 	Added ListBox containing the current songs in the playlist, songs can be clicked on to play them
 	Added tooltips
+	Added stop button and volume controls, and the button control for looping, though without functionality yet

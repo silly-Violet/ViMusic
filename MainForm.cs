@@ -14,12 +14,18 @@ namespace ViMusic
 
         private int hoverCounter = 0;
         private readonly Graphics progressBarGraphics;
+        private readonly Graphics volumeDisplayGraphics;
+
+        //modifiable by settings:
+        public float volumeStep = 0.1f;
+        public Color barFillColour = Color.FromArgb(255, 127, 167, 237);
 
         public MainForm()
         {
             InitializeComponent();
 
             progressBarGraphics = progressBar.CreateGraphics();
+            volumeDisplayGraphics = volumeDisplay.CreateGraphics();
             playlistListBox.BackColor = this.BackColor;
 
             ResetRender();
@@ -40,6 +46,12 @@ namespace ViMusic
 
         private void UpdateEverything()
         {
+            //Debug
+            {
+                
+            }
+
+
             // UpdateTimer
             {
                 var minutes = musicPlayer.CurrentTime.Minutes;
@@ -61,10 +73,20 @@ namespace ViMusic
                 */
 
                 progressBarGraphics.FillRectangle(
-                    new SolidBrush(Color.FromArgb(255, 127, 167, 237)), // colour choice
+                    new SolidBrush(barFillColour), // colour choice
                     0, 0, // position of top left corner
                     (float)(progressBar.Width * (musicPlayer.CurrentTime.TotalSeconds / musicPlayer.Duration.TotalSeconds)), // width of rectangle
                     progressBar.Height); // height of rectangle
+            }
+
+            // UpdateVolumeDisplay
+            {                
+                volumeDisplayGraphics.FillRectangle(
+                    new SolidBrush(barFillColour),
+                    0, 0,
+                    (float)(volumeDisplay.Width * (musicPlayer.Volume / 1)),
+                    volumeDisplay.Height);
+
             }
 
             // UpdatePlayIcon
@@ -128,7 +150,7 @@ namespace ViMusic
         private void ResetRender()
         {
             timeLabel.Text = "00:00 / 00:00";
-            progressBarGraphics.Clear(Color.FromArgb(255, 30, 43, 66));
+            progressBarGraphics.Clear(progressBar.BackColor);
             songName.Text = "Name: N/A";
             albumName.Text = "Album: N/A";
             artistName.Text = "Artist: N/A";
@@ -205,7 +227,7 @@ namespace ViMusic
 
             }
 
-            
+
 
             if (!musicPlayer.IsStopped) musicPlayer.Stop();
             LoadSong(currentPlaylist[0]);
@@ -238,7 +260,7 @@ namespace ViMusic
 
             hoverLabel.Text = $"{(minutes < 10 ? $"0{minutes}" : minutes)}:{(seconds < 10 ? $"0{seconds}" : seconds)}";
             hoverLabel.Top = progressBar.Top - 18;
-            hoverLabel.Left = mousePos.X + 33;
+            hoverLabel.Left = mousePos.X + progressBar.Left - 18;
 
             hoverLabel.Tag = "modified";
         }
@@ -264,6 +286,26 @@ namespace ViMusic
             //LoadSong(currentPlaylist[playlistListBox.SelectedIndex]);
             playlistIndex = playlistListBox.SelectedIndex;
             musicPlayer.Stop();
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            musicPlayer.Stop();
+            musicPlayer.Play();     // <- this is here so it doesn't go to the next song when in a playlist
+            musicPlayer.Pause();    // <-
+            ResetRender();
+
+        }
+
+        private void VolumeDown_Click(object sender, EventArgs e)
+        {
+            musicPlayer.Volume += -volumeStep;
+            volumeDisplayGraphics.Clear(volumeDisplay.BackColor);
+        }
+
+        private void VolumeUp_Click(object sender, EventArgs e)
+        {
+            musicPlayer.Volume += volumeStep;
         }
 
 
