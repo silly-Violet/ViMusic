@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             pausePlayButton = new Button();
             timeLabel = new Label();
@@ -41,6 +42,7 @@
             folderDialog = new FolderBrowserDialog();
             hoverLabel = new Label();
             playlistListBox = new ListBox();
+            toolTipHandler = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
             SuspendLayout();
             // 
@@ -52,6 +54,7 @@
             pausePlayButton.Name = "pausePlayButton";
             pausePlayButton.Size = new Size(32, 32);
             pausePlayButton.TabIndex = 1;
+            toolTipHandler.SetToolTip(pausePlayButton, "Pause/Play");
             pausePlayButton.UseVisualStyleBackColor = false;
             pausePlayButton.Click += PausePlayButton_Click;
             // 
@@ -85,6 +88,7 @@
             openFile.Name = "openFile";
             openFile.Size = new Size(32, 32);
             openFile.TabIndex = 4;
+            toolTipHandler.SetToolTip(openFile, "Open a file");
             openFile.UseVisualStyleBackColor = false;
             openFile.Click += OpenFile_Click;
             // 
@@ -97,6 +101,7 @@
             openFolder.Name = "openFolder";
             openFolder.Size = new Size(32, 32);
             openFolder.TabIndex = 5;
+            toolTipHandler.SetToolTip(openFolder, "Open a folder as playlist");
             openFolder.UseVisualStyleBackColor = false;
             openFolder.Click += OpenFolder_Click;
             // 
@@ -198,5 +203,6 @@
         private FolderBrowserDialog folderDialog;
         private Label hoverLabel;
         private ListBox playlistListBox;
+        private ToolTip toolTipHandler;
     }
 }

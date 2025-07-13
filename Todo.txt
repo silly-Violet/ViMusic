@@ -32,7 +32,7 @@ loop playlist and individual song
 
 drag and drop
 
-hover tooltips										
+change the way listbox scrollbar looks to be darkmode too
 
 forward and back songs in playlist
 
