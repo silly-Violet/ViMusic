@@ -48,7 +48,7 @@ namespace ViMusic
         {
             //Debug
             {
-                
+
             }
 
 
@@ -80,7 +80,7 @@ namespace ViMusic
             }
 
             // UpdateVolumeDisplay
-            {                
+            {
                 volumeDisplayGraphics.FillRectangle(
                     new SolidBrush(barFillColour),
                     0, 0,
@@ -269,6 +269,8 @@ namespace ViMusic
         {
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
+                currentPlaylist = new();
+                playlistListBox.Items.Clear();
                 LoadSong(fileDialog.FileName);
             }
         }
@@ -306,6 +308,23 @@ namespace ViMusic
         private void VolumeUp_Click(object sender, EventArgs e)
         {
             musicPlayer.Volume += volumeStep;
+        }
+
+        private void PlaylistBack_Click(object sender, EventArgs e)
+        {
+            if (playlistIndex > 1 && musicPlayer.IsReady)
+            {
+                playlistIndex -= 2;
+                musicPlayer.Stop();
+            }
+        }
+
+        private void PlaylistForward_Click(object sender, EventArgs e)
+        {
+            if (playlistIndex < currentPlaylist.Count && musicPlayer.IsReady)
+            {
+                musicPlayer.Stop();
+            }
         }
 
 

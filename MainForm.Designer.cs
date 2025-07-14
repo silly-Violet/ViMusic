@@ -48,6 +48,8 @@
             volumeDown = new Button();
             volumeUp = new Button();
             volumeDisplay = new PictureBox();
+            playlistBack = new Button();
+            playlistForward = new Button();
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)volumeDisplay).BeginInit();
             SuspendLayout();
@@ -129,7 +131,7 @@
             // 
             albumName.AutoSize = true;
             albumName.BackColor = Color.Transparent;
-            albumName.Location = new Point(298, 144);
+            albumName.Location = new Point(298, 118);
             albumName.Name = "albumName";
             albumName.Size = new Size(71, 15);
             albumName.TabIndex = 7;
@@ -139,7 +141,7 @@
             // 
             artistName.AutoSize = true;
             artistName.BackColor = Color.Transparent;
-            artistName.Location = new Point(298, 98);
+            artistName.Location = new Point(298, 84);
             artistName.Name = "artistName";
             artistName.Size = new Size(63, 15);
             artistName.TabIndex = 8;
@@ -229,12 +231,40 @@
             volumeDisplay.TabStop = false;
             toolTipHandler.SetToolTip(volumeDisplay, "Volume Meter");
             // 
+            // playlistBack
+            // 
+            playlistBack.BackColor = Color.FromArgb(41, 41, 41);
+            playlistBack.FlatStyle = FlatStyle.Popup;
+            playlistBack.Image = (Image)resources.GetObject("playlistBack.Image");
+            playlistBack.Location = new Point(298, 143);
+            playlistBack.Name = "playlistBack";
+            playlistBack.Size = new Size(28, 28);
+            playlistBack.TabIndex = 17;
+            toolTipHandler.SetToolTip(playlistBack, "Previous Song");
+            playlistBack.UseVisualStyleBackColor = false;
+            playlistBack.Click += PlaylistBack_Click;
+            // 
+            // playlistForward
+            // 
+            playlistForward.BackColor = Color.FromArgb(41, 41, 41);
+            playlistForward.FlatStyle = FlatStyle.Popup;
+            playlistForward.Image = (Image)resources.GetObject("playlistForward.Image");
+            playlistForward.Location = new Point(332, 143);
+            playlistForward.Name = "playlistForward";
+            playlistForward.Size = new Size(28, 28);
+            playlistForward.TabIndex = 18;
+            toolTipHandler.SetToolTip(playlistForward, "Next Song");
+            playlistForward.UseVisualStyleBackColor = false;
+            playlistForward.Click += PlaylistForward_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
             ClientSize = new Size(534, 240);
+            Controls.Add(playlistForward);
+            Controls.Add(playlistBack);
             Controls.Add(volumeDisplay);
             Controls.Add(volumeUp);
             Controls.Add(volumeDown);
@@ -280,5 +310,7 @@
         private Button volumeDown;
         private Button volumeUp;
         private PictureBox volumeDisplay;
+        private Button playlistBack;
+        private Button playlistForward;
     }
 }
