@@ -210,6 +210,7 @@ namespace ViMusic
         private void LoadPlaylist(string filepath)
         {
             currentPlaylist = new();
+            playlistListBox.Items.Clear();
 
             string[] validExtensions = [".mp3", ".wav", ".ogg", ".flac"];
 
@@ -227,7 +228,33 @@ namespace ViMusic
 
             }
 
+            if (!musicPlayer.IsStopped) musicPlayer.Stop();
+            LoadSong(currentPlaylist[0]);
+            playlistIndex = 1;
+        }
 
+        private void LoadPlaylist(string[] paths)
+        {
+            currentPlaylist = new();
+            playlistListBox.Items.Clear();
+
+            string[] validExtensions = [".mp3", ".wav", ".ogg", ".flac"];
+
+            foreach (var file in paths)
+            {
+                var shell = ShellFile.FromFilePath(file);
+                if (validExtensions.Contains(shell.Properties.System.FileExtension.Value))
+                {
+                    currentPlaylist.Add(file);
+
+                    
+                    var title = shell.Properties.System.Title.Value;
+                    var fileName = shell.Properties.System.FileName.Value;
+
+                    playlistListBox.Items.Add(string.IsNullOrWhiteSpace(title) ? fileName.Substring(0, fileName.IndexOf('.')) : title);
+                }
+
+            }
 
             if (!musicPlayer.IsStopped) musicPlayer.Stop();
             LoadSong(currentPlaylist[0]);
@@ -327,6 +354,35 @@ namespace ViMusic
             }
         }
 
+        private void FileHover(object sender, DragEventArgs e)
+        {
+            //https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/walkthrough-performing-a-drag-and-drop-operation-in-windows-forms
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void FileDrop(object sender, DragEventArgs e)
+        {
+            //https://stackoverflow.com/questions/68598/how-do-i-drag-and-drop-files-into-an-application            
+
+            string[] files = (from file in (string[])e.Data.GetData(DataFormats.FileDrop) where (file.ToLower().EndsWith(".mp3") || file.ToLower().EndsWith(".ogg") || file.ToLower().EndsWith(".wav") || file.ToLower().EndsWith(".flac")) select file).ToArray();
+
+            if (files.Length == 1)
+            {
+                currentPlaylist = new();
+                playlistListBox.Items.Clear();
+                LoadSong(files[0]);
+            }
+            else if (files.Length != 0)
+            {
+                LoadPlaylist(files);
+            }                
+        }
 
         /* gradient drawing code
         public void GradientBackground(object sender, PaintEventArgs e)

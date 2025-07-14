@@ -10,3 +10,4 @@
 
 14/07/2025:
 	Added forward and back buttons for playlists, and also made loading a song after having a playlist loaded clear the playlist
+	Added drag and drop for files

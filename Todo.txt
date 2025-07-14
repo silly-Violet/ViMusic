@@ -6,13 +6,15 @@ modify shows a shorter duration than it should however still plays normally (it 
 
 stop didn't pause once
 
-
+after song ends play doesn't replay it anymore
 
 
 
 
 
 features:
+
+make icon for app (music note?)
 
 modify tab indexes so it's natural to move with only keyboard
 
@@ -27,9 +29,3 @@ Add about/credits for nuget packages and me
 save volume to be loaded next time, along with settings once implimented
 
 loop playlist and individual song
-
-drag and drop
-
-forward and back songs in playlist
-
-display songs in playlist

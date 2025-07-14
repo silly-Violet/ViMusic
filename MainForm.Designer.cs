@@ -259,6 +259,7 @@
             // 
             // MainForm
             // 
+            AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
@@ -285,6 +286,8 @@
             MaximizeBox = false;
             Name = "MainForm";
             Text = "Vi Music";
+            DragOver += FileHover;
+            DragDrop += FileDrop;
             ((System.ComponentModel.ISupportInitialize)progressBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)volumeDisplay).EndInit();
             ResumeLayout(false);
