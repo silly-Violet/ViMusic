@@ -1,4 +1,3 @@
-using System.Drawing.Drawing2D;
 using Microsoft.WindowsAPICodePack.Shell;
 
 namespace ViMusic
@@ -247,7 +246,7 @@ namespace ViMusic
                 {
                     currentPlaylist.Add(file);
 
-                    
+
                     var title = shell.Properties.System.Title.Value;
                     var fileName = shell.Properties.System.FileName.Value;
 
@@ -381,7 +380,13 @@ namespace ViMusic
             else if (files.Length != 0)
             {
                 LoadPlaylist(files);
-            }                
+            }
+        }
+
+        private void AboutButton_Click(object sender, EventArgs e)
+        {
+            var aboutForm = new About();
+            aboutForm.ShowDialog();
         }
 
         /* gradient drawing code

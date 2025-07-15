@@ -50,6 +50,7 @@
             volumeDisplay = new PictureBox();
             playlistBack = new Button();
             playlistForward = new Button();
+            aboutButton = new Button();
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)volumeDisplay).BeginInit();
             SuspendLayout();
@@ -257,13 +258,27 @@
             playlistForward.UseVisualStyleBackColor = false;
             playlistForward.Click += PlaylistForward_Click;
             // 
+            // aboutButton
+            // 
+            aboutButton.BackColor = Color.FromArgb(41, 41, 41);
+            aboutButton.FlatStyle = FlatStyle.Popup;
+            aboutButton.Image = (Image)resources.GetObject("aboutButton.Image");
+            aboutButton.Location = new Point(490, 12);
+            aboutButton.Name = "aboutButton";
+            aboutButton.Size = new Size(32, 32);
+            aboutButton.TabIndex = 19;
+            toolTipHandler.SetToolTip(aboutButton, "About");
+            aboutButton.UseVisualStyleBackColor = false;
+            aboutButton.Click += AboutButton_Click;
+            // 
             // MainForm
             // 
             AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
-            ClientSize = new Size(534, 240);
+            ClientSize = new Size(534, 241);
+            Controls.Add(aboutButton);
             Controls.Add(playlistForward);
             Controls.Add(playlistBack);
             Controls.Add(volumeDisplay);
@@ -286,8 +301,8 @@
             MaximizeBox = false;
             Name = "MainForm";
             Text = "Vi Music";
-            DragOver += FileHover;
             DragDrop += FileDrop;
+            DragOver += FileHover;
             ((System.ComponentModel.ISupportInitialize)progressBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)volumeDisplay).EndInit();
             ResumeLayout(false);
@@ -315,5 +330,6 @@
         private PictureBox volumeDisplay;
         private Button playlistBack;
         private Button playlistForward;
+        private Button aboutButton;
     }
 }

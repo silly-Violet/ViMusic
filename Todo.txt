@@ -20,11 +20,7 @@ modify tab indexes so it's natural to move with only keyboard
 
 add settings for things like hover cooldown
 
-add musicsync built in (should be as a simple as opening the application as a separate window from a button) (also maybe remake musicsync as a winform)
-
-add tray icon and ability to hide main windows and show from tray right click option
-
-Add about/credits for nuget packages and me
+add tray icon and ability to hide main window and show from tray right click option
 
 save volume to be loaded next time, along with settings once implimented
 

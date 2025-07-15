@@ -1,7 +1,5 @@
-﻿using Microsoft.VisualBasic.Devices;
-using NAudio.Vorbis;
+﻿using NAudio.Vorbis;
 using NAudio.Wave;
-using System.Runtime.CompilerServices;
 
 namespace ViMusic
 {
