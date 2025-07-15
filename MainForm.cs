@@ -37,7 +37,13 @@ namespace ViMusic
 
         private async void PausePlayButton_Click(object sender, EventArgs e)
         {
-            if (!musicPlayer.IsPlaying)
+            if (musicPlayer.IsStopped)
+            {
+                musicPlayer.Seek(TimeSpan.Zero);
+                ResetRender();
+                musicPlayer.Play();
+            }
+            else if (!musicPlayer.IsPlaying)
                 await musicPlayer.Play();
             else
                 musicPlayer.Pause();

@@ -14,3 +14,4 @@
 
 15/07/2025:
 	Added about window
+	Added music note app icon

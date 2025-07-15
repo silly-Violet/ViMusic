@@ -6,15 +6,13 @@ modify shows a shorter duration than it should however still plays normally (it 
 
 stop didn't pause once
 
-after song ends play doesn't replay it anymore
-
 
 
 
 
 features:
 
-make icon for app (music note?)
+make backgrounds for windows
 
 modify tab indexes so it's natural to move with only keyboard
 
