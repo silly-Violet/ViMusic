@@ -20,3 +20,4 @@
 	Added label to show what song in the playlist you're on
 	Replaced loop button with mute and implimented
 	Fixed flickering when volume bar went down
+	Recoloured backgrounds and buttons

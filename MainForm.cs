@@ -37,6 +37,8 @@ namespace ViMusic
             volumeDisplayGraphics = volumeDisplay.CreateGraphics();
             playlistListBox.BackColor = this.BackColor;
 
+            notifyIcon.ContextMenuStrip = contextMenuStrip;
+
             ResetRender();
 
             //musicPlayer.LoadAudioFromFile("D:\\Music\\Main\\Misc\\Notion.mp3");
@@ -199,6 +201,11 @@ namespace ViMusic
                 if (playlistCounter.Text == "0 / 0") playlistCounter.Text = ""; //make it invisible if there is no playlist loaded
             }
 
+            // UpdateTrayMenu
+            {
+                playToolStripMenuItem.Text = musicPlayer.IsPlaying ? "Pause" : "Play";
+            }
+
         }
 
         private void ResetRender()
@@ -225,7 +232,7 @@ namespace ViMusic
                         {
                             this.Invoke(new Action<string>(LoadSong), [currentPlaylist[playlistIndex]]);
                             playlistIndex++;
-                        }                        
+                        }
                     }
                 }
 
@@ -481,10 +488,28 @@ namespace ViMusic
 
         }
 
-        /*
-        public void OnLoop(object sender, LoopEventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Invoke(ResetRender);
-        }*/
+            Close();
+        }
+
+        private void HideMainWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hideMainWindowToolStripMenuItem.Text == "Hide main window")
+            {
+                this.Hide();
+                hideMainWindowToolStripMenuItem.Text = "Show main window";
+            }
+            else
+            {
+                this.Show();
+                hideMainWindowToolStripMenuItem.Text = "Hide main window";
+            }
+        }
+
+        private void PlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PausePlayButton_Click(sender, e);
+        }
     }
 }

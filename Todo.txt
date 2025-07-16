@@ -11,9 +11,3 @@ stop doesn't pause sometimes
 
 
 features:
-
-make backgrounds for windows
-
-modify tab indexes so it's natural to move with only keyboard
-
-add tray icon and ability to hide main window and show from tray right click option
