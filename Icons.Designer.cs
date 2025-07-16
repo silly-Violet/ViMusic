@@ -93,6 +93,16 @@ namespace ViMusic {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] muted {
+            get {
+                object obj = ResourceManager.GetObject("muted", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] pause {
             get {
                 object obj = ResourceManager.GetObject("pause", resourceCulture);
@@ -113,9 +123,9 @@ namespace ViMusic {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] stop {
+        internal static byte[] playing {
             get {
-                object obj = ResourceManager.GetObject("stop", resourceCulture);
+                object obj = ResourceManager.GetObject("playing", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -127,6 +137,46 @@ namespace ViMusic {
             get {
                 object obj = ResourceManager.GetObject("umbre", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] volumedown {
+            get {
+                object obj = ResourceManager.GetObject("volumedown", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] volumedowndisabled {
+            get {
+                object obj = ResourceManager.GetObject("volumedowndisabled", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] volumeup {
+            get {
+                object obj = ResourceManager.GetObject("volumeup", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] volumeupdisabled {
+            get {
+                object obj = ResourceManager.GetObject("volumeupdisabled", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

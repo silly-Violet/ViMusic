@@ -4,7 +4,7 @@ bugs:
 
 modify shows a shorter duration than it should however still plays normally (it fixed itself? no for some reason specifically the one in my test folder is bugged, actually no again it's just weird idk)
 
-stop didn't pause once
+stop doesn't pause sometimes
 
 
 
@@ -16,10 +16,4 @@ make backgrounds for windows
 
 modify tab indexes so it's natural to move with only keyboard
 
-add settings for things like hover cooldown
-
 add tray icon and ability to hide main window and show from tray right click option
-
-save volume to be loaded next time, along with settings once implimented
-
-loop playlist and individual song

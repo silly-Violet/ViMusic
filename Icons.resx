@@ -127,16 +127,31 @@
   <data name="invalid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\invalid.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="muted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\muted.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\pause.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\play.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\stop.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="playing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\playing.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="umbre" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\umbre.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="volumedown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\volumedown.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="volumedowndisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\volumedowndisabled.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="volumeup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\volumeup.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="volumeupdisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\volumeupdisabled.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

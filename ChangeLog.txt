@@ -15,3 +15,8 @@
 15/07/2025:
 	Added about window
 	Added music note app icon
+
+16/07/2025:
+	Added label to show what song in the playlist you're on
+	Replaced loop button with mute and implimented
+	Fixed flickering when volume bar went down

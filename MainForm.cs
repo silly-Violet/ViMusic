@@ -1,10 +1,12 @@
 using Microsoft.WindowsAPICodePack.Shell;
+using System.Reflection;
+using System.Text.Json;
 
 namespace ViMusic
 {
     public partial class MainForm : Form
     {
-        private readonly MusicPlayer musicPlayer = new();
+        private readonly MusicPlayer musicPlayer;
 
         private ShellFile? currentSong;
         private List<string> currentPlaylist = new();
@@ -14,15 +16,23 @@ namespace ViMusic
         private int hoverCounter = 0;
         private readonly Graphics progressBarGraphics;
         private readonly Graphics volumeDisplayGraphics;
+        private bool muted = false;
+        private float prevVolume = 1f;
 
         //modifiable by settings:
         public float volumeStep = 0.1f;
         public Color barFillColour = Color.FromArgb(255, 127, 167, 237);
+        public Color muteActive = Color.FromArgb(255, 191, 116, 255);
 
         public MainForm()
         {
             InitializeComponent();
 
+            //code yoinked from my own library I didn't want to import all of
+            var programDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            ConfirmFileExists("volume.json", 1f);
+
+            musicPlayer = new(ReadFromJson<float>("volume.json"));
             progressBarGraphics = progressBar.CreateGraphics();
             volumeDisplayGraphics = volumeDisplay.CreateGraphics();
             playlistListBox.BackColor = this.BackColor;
@@ -33,6 +43,38 @@ namespace ViMusic
 
             Task.Run(() => BackgroundTask());
 
+        }
+
+        //also joinked
+        public static bool ConfirmFileExists<T>(string filename, T data)
+        {
+            if (!File.Exists(filename)) { SaveToJson(filename, data); return false; }
+            return true;
+        }
+
+        //these two are yoinked as well
+        /// <summary>
+        /// Saves data to a file
+        /// </summary>
+        /// <typeparam name="T">The type of the data</typeparam>
+        /// <param name="filename">The filename/path to store the file</param>
+        /// <param name="data">The data to store</param>
+        public static void SaveToJson<T>(string filename, T data)
+        {
+            using FileStream fileStream = File.Create(filename);
+            JsonSerializer.Serialize(fileStream, data);
+        }
+
+        /// <summary>
+        /// Returns the data located in the specified file path
+        /// </summary>
+        /// <typeparam name="T?">The type of the data</typeparam>
+        /// <param name="filename">The filename/path of the file</param>
+        /// <returns>The data in the file (May return null if no data is present)</returns>
+        public static T? ReadFromJson<T>(string filename)
+        {
+            using FileStream fileStream = File.OpenRead(filename);
+            return JsonSerializer.Deserialize<T>(fileStream);
         }
 
         private async void PausePlayButton_Click(object sender, EventArgs e)
@@ -128,6 +170,7 @@ namespace ViMusic
                     artistName.Text = "Artist: " + (string.IsNullOrEmpty(artist) ? "N/A" : artist);
                 }
             }
+
             // UpdateHoverLabel
             {
                 int hoverCooldown = 5; //change to modify how long it takes to hide hover
@@ -150,6 +193,12 @@ namespace ViMusic
                 }
             }
 
+            // UpdatePlaylistCounter
+            {
+                playlistCounter.Text = (playlistIndex < 0 ? "0" : playlistIndex) + " / " + currentPlaylist.Count;
+                if (playlistCounter.Text == "0 / 0") playlistCounter.Text = ""; //make it invisible if there is no playlist loaded
+            }
+
         }
 
         private void ResetRender()
@@ -159,6 +208,7 @@ namespace ViMusic
             songName.Text = "Name: N/A";
             albumName.Text = "Album: N/A";
             artistName.Text = "Artist: N/A";
+            playlistCounter.Text = "0 / 0";
             UpdateEverything();
         }
 
@@ -175,15 +225,11 @@ namespace ViMusic
                         {
                             this.Invoke(new Action<string>(LoadSong), [currentPlaylist[playlistIndex]]);
                             playlistIndex++;
-                        }
-
+                        }                        
                     }
                 }
 
                 // rendering
-
-                //if (!musicPlayer.IsStopped)
-
                 try
                 {
                     if (!this.IsHandleCreated) continue; // make sure invoke isn't called when it's not allowed
@@ -324,6 +370,8 @@ namespace ViMusic
 
         private void StopButton_Click(object sender, EventArgs e)
         {
+            if (!musicPlayer.IsReady) return;
+
             musicPlayer.Stop();
             musicPlayer.Play();     // <- this is here so it doesn't go to the next song when in a playlist
             musicPlayer.Pause();    // <-
@@ -334,12 +382,22 @@ namespace ViMusic
         private void VolumeDown_Click(object sender, EventArgs e)
         {
             musicPlayer.Volume += -volumeStep;
-            volumeDisplayGraphics.Clear(volumeDisplay.BackColor);
+
+            var volumeAmount = (float)(volumeDisplay.Width * (musicPlayer.Volume / 1));
+
+            volumeDisplayGraphics.FillRectangle(
+                    new SolidBrush(volumeDisplay.BackColor),
+                    volumeAmount, 0,
+                    volumeDisplay.Width - volumeAmount,
+                    volumeDisplay.Height);
+
+            SaveToJson("volume.json", musicPlayer.Volume);
         }
 
         private void VolumeUp_Click(object sender, EventArgs e)
         {
             musicPlayer.Volume += volumeStep;
+            SaveToJson("volume.json", musicPlayer.Volume);
         }
 
         private void PlaylistBack_Click(object sender, EventArgs e)
@@ -395,19 +453,38 @@ namespace ViMusic
             aboutForm.ShowDialog();
         }
 
-        /* gradient drawing code
-        public void GradientBackground(object sender, PaintEventArgs e)
+        private void MuteButton_Click(object sender, EventArgs e)
         {
-            //https://learn.microsoft.com/en-us/dotnet/desktop/winforms/advanced/how-to-create-a-linear-gradient
+            if (muted)
+            {
+                muted = false;
+                musicPlayer.Volume = prevVolume;
+                muteButton.BackColor = pausePlayButton.BackColor;
+                muteButton.Image = Image.FromStream(new MemoryStream(Icons.playing));
+                volumeDown.Enabled = true;
+                volumeUp.Enabled = true;
+                volumeDown.Image = Image.FromStream(new MemoryStream(Icons.volumedown));
+                volumeUp.Image = Image.FromStream(new MemoryStream(Icons.volumeup));
+            }
+            else
+            {
+                muted = true;
+                prevVolume = musicPlayer.Volume;
+                musicPlayer.Volume = 0f;
+                muteButton.BackColor = muteActive;
+                muteButton.Image = Image.FromStream(new MemoryStream(Icons.muted));
+                volumeDown.Enabled = false;
+                volumeUp.Enabled = false;
+                volumeDown.Image = Image.FromStream(new MemoryStream(Icons.volumedowndisabled));
+                volumeUp.Image = Image.FromStream(new MemoryStream(Icons.volumeupdisabled));
+            }
 
-             var gradBrush = new LinearGradientBrush(
-               new Point(0, 0),
-               new Point(this.Width, this.Height),
-               Color.FromArgb(255, 73, 65, 158),   
-               Color.FromArgb(255, 31, 30, 65));  
-
-            e.Graphics.FillRectangle(gradBrush, 0, 0, this.Width, this.Height);
         }
-        */
+
+        /*
+        public void OnLoop(object sender, LoopEventArgs e)
+        {
+            this.Invoke(ResetRender);
+        }*/
     }
 }

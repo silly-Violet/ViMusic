@@ -3,6 +3,21 @@ using NAudio.Wave;
 
 namespace ViMusic
 {
+    /*
+    //https://stackoverflow.com/questions/623451/how-can-i-make-my-own-event-in-c
+
+    public delegate void LoopEvent(object source, LoopEventArgs e);
+
+    public class LoopEventArgs(string Text) : EventArgs
+    {
+        private string EventInfo = Text;
+
+        public string GetInfo()
+        {
+            return EventInfo;
+        }
+    }*/
+
     internal class MusicPlayer
     {
         //https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileConsoleApp.md
@@ -14,6 +29,8 @@ namespace ViMusic
         private bool isOgg;
 
         //public fields
+        //public event LoopEvent OnLoop;
+
         public TimeSpan CurrentTime
         {
             get
@@ -78,10 +95,13 @@ namespace ViMusic
             }
         }
 
-        public MusicPlayer()
+        //public bool Loop { get; set; }
+
+
+        public MusicPlayer(float volume = 1.0f)
         {
             outputDevice = new WaveOutEvent();
-            outputDevice.Volume = 1.0f;
+            outputDevice.Volume = volume;
         }
 
         public void LoadAudioFromFile(string filename)
@@ -109,15 +129,20 @@ namespace ViMusic
         /// </summary>
         public async Task Play()
         {
-
             await Task.Run(() =>
-            {
+            {               
                 outputDevice.Play();
 
                 while (outputDevice.PlaybackState == PlaybackState.Playing)
                 {
                     Thread.Sleep(500);
                 }
+
+                //if (Loop)
+                //{
+                    //Stop();
+                    //Play();                    
+                //}
             });
         }
 
@@ -132,6 +157,8 @@ namespace ViMusic
         /// </summary>
         public void Stop()
         {
+            //await Task.Run(() => { if (Loop && OnLoop != null) OnLoop.Invoke(this, new("Looped")); });
+
             Seek(-CurrentTime);
 
             outputDevice.Stop();

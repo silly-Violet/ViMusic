@@ -44,13 +44,14 @@
             playlistListBox = new ListBox();
             toolTipHandler = new ToolTip(components);
             stopButton = new Button();
-            loopButton = new Button();
+            muteButton = new Button();
             volumeDown = new Button();
             volumeUp = new Button();
             volumeDisplay = new PictureBox();
             playlistBack = new Button();
             playlistForward = new Button();
             aboutButton = new Button();
+            playlistCounter = new Label();
             ((System.ComponentModel.ISupportInitialize)progressBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)volumeDisplay).BeginInit();
             SuspendLayout();
@@ -85,6 +86,7 @@
             progressBar.Size = new Size(368, 20);
             progressBar.TabIndex = 3;
             progressBar.TabStop = false;
+            toolTipHandler.SetToolTip(progressBar, "Click to seek");
             progressBar.Click += ProgressBar_Click;
             progressBar.MouseMove += ProgressBar_MouseMove;
             // 
@@ -185,16 +187,18 @@
             stopButton.UseVisualStyleBackColor = false;
             stopButton.Click += StopButton_Click;
             // 
-            // loopButton
+            // muteButton
             // 
-            loopButton.BackColor = Color.FromArgb(41, 41, 41);
-            loopButton.FlatStyle = FlatStyle.Popup;
-            loopButton.Location = new Point(76, 199);
-            loopButton.Name = "loopButton";
-            loopButton.Size = new Size(20, 20);
-            loopButton.TabIndex = 12;
-            toolTipHandler.SetToolTip(loopButton, "Loop");
-            loopButton.UseVisualStyleBackColor = false;
+            muteButton.BackColor = Color.FromArgb(41, 41, 41);
+            muteButton.FlatStyle = FlatStyle.Popup;
+            muteButton.Image = (Image)resources.GetObject("muteButton.Image");
+            muteButton.Location = new Point(76, 199);
+            muteButton.Name = "muteButton";
+            muteButton.Size = new Size(20, 20);
+            muteButton.TabIndex = 12;
+            toolTipHandler.SetToolTip(muteButton, "Mute");
+            muteButton.UseVisualStyleBackColor = false;
+            muteButton.Click += MuteButton_Click;
             // 
             // volumeDown
             // 
@@ -271,6 +275,17 @@
             aboutButton.UseVisualStyleBackColor = false;
             aboutButton.Click += AboutButton_Click;
             // 
+            // playlistCounter
+            // 
+            playlistCounter.AutoSize = true;
+            playlistCounter.BackColor = Color.Transparent;
+            playlistCounter.Location = new Point(366, 150);
+            playlistCounter.Name = "playlistCounter";
+            playlistCounter.Size = new Size(30, 15);
+            playlistCounter.TabIndex = 20;
+            playlistCounter.Text = "0 / 0";
+            toolTipHandler.SetToolTip(playlistCounter, "Current / Amount in playlist");
+            // 
             // MainForm
             // 
             AllowDrop = true;
@@ -278,13 +293,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(31, 31, 31);
             ClientSize = new Size(534, 241);
+            Controls.Add(playlistCounter);
             Controls.Add(aboutButton);
             Controls.Add(playlistForward);
             Controls.Add(playlistBack);
             Controls.Add(volumeDisplay);
             Controls.Add(volumeUp);
             Controls.Add(volumeDown);
-            Controls.Add(loopButton);
+            Controls.Add(muteButton);
             Controls.Add(stopButton);
             Controls.Add(playlistListBox);
             Controls.Add(hoverLabel);
@@ -325,12 +341,13 @@
         private ListBox playlistListBox;
         private ToolTip toolTipHandler;
         private Button stopButton;
-        private Button loopButton;
+        private Button muteButton;
         private Button volumeDown;
         private Button volumeUp;
         private PictureBox volumeDisplay;
         private Button playlistBack;
         private Button playlistForward;
         private Button aboutButton;
+        private Label playlistCounter;
     }
 }

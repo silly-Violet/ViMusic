@@ -145,9 +145,16 @@
   </metadata>
   <data name="stopButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAFRJREFUOE/t
-        zDEKACAUw1Dvf2ldykezGMFF8M1pW3tKP8T9grHFn8LQ4k9RUahWRaFaFYVqVRSqVVGoVkWhWhWFalUU
-        qp2jE/wpDC3+LBjvcP/dMQBwzf4QKRedHAAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAE5JREFUOE/t
+        zDEKgDAABMH8/9NaGcg2YyCN4NZzN8anujbrfqn4bf2ZESR6gkRPkOgJEj1BoidI9ASJniDREyR6gkT/
+        gN36s1Ssuv870w3a026gpX4hBwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="muteButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAFtJREFUOE/t
+        jEEOwCAMw/j/pzvl0GkygVGx04RPjZK6tV8QETHLJfKZEuYlnk9OXJJy7ETcdGiQuI63291MyyNcEgoN
+        EtfxdrshHG8LxZukLBRO5HIJPjMfvuUCHEHXKd3TCfEAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="volumeDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
